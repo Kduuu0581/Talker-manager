@@ -1,6 +1,7 @@
 const express = require('express');
 const readFile = require('./utils/readFile');
 const generateTolken = require('./utils/generateTolken');
+const validateEmailPassword = require('./middleware/validateEmailPassword');
 
 const app = express();
 app.use(express.json());
@@ -31,7 +32,8 @@ app.get('/talker/:id', async (request, response) => {
 });
 
 // Requisito 3 - Crie o endpoint POST /login
-app.post('/login', (request, response) => {
+// Requisito 4 - Crie o endpoint POST /talker
+app.post('/login', validateEmailPassword, (request, response) => {
   const token = generateTolken();
   return response.status(HTTP_OK_STATUS).json({ token });
 });
