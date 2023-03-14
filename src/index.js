@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const app = express();
 app.use(express.json());
@@ -9,6 +10,13 @@ const PORT = process.env.PORT || '3001';
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
+});
+
+app.get('/talker', (request, response) => {
+  fs.readFile('src/talker.json', (err, data) => {
+    if (err) throw err;
+    response.status(HTTP_OK_STATUS).json(JSON.parse(data));
+  });
 });
 
 app.listen(PORT, () => {
