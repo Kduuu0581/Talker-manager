@@ -1,5 +1,6 @@
 const express = require('express');
 const readFile = require('./utils/readFile');
+const generateTolken = require('./utils/generateTolken');
 
 const app = express();
 app.use(express.json());
@@ -27,6 +28,12 @@ app.get('/talker/:id', async (request, response) => {
     return response.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   }
   return response.status(HTTP_OK_STATUS).json(talkerId);
+});
+
+// Requisito 3 - Crie o endpoint POST /login
+app.post('/login', (request, response) => {
+  const token = generateTolken();
+  return response.status(HTTP_OK_STATUS).json({ token });
 });
 
 app.listen(PORT, () => {
