@@ -2,6 +2,11 @@ const express = require('express');
 const readFile = require('./utils/readFile');
 const generateTolken = require('./utils/generateTolken');
 const validateEmailPassword = require('./middleware/validateEmailPassword');
+const checkToken = require('./middleware/checkToken');
+const writeFile = require('./utils/writeFile');
+const validationName = require('./middleware/validationName');
+const validationAge = require('./middleware/validationAge');
+const { validationTalk, validationRate } = require('./middleware/validationTalk');
 
 const app = express();
 app.use(express.json());
@@ -32,10 +37,31 @@ app.get('/talker/:id', async (request, response) => {
 });
 
 // Requisito 3 - Crie o endpoint POST /login
-// Requisito 4 - Crie o endpoint POST /talker
+// Requisito 4 - Adicione as validações para o endpoint /login
 app.post('/login', validateEmailPassword, (request, response) => {
   const token = generateTolken();
   return response.status(HTTP_OK_STATUS).json({ token });
+});
+
+// Requisito 5 - Crie o endpoint POST /talker
+app.use(checkToken);
+
+app.post('/talker', validationName, validationAge, validationTalk, 
+  validationRate, async (request, response) => {
+  const { name, age, talk: { watchedAt, rate } } = request.body;
+  const talkers = await readFile();
+  const newTalker = {
+    id: talkers.length + 1,
+    name,
+    age,
+    talk: {
+      watchedAt,
+      rate,
+    },
+  };
+  talkers.push(newTalker);
+  await writeFile(talkers);
+  return response.status(201).json(newTalker);
 });
 
 app.listen(PORT, () => {
