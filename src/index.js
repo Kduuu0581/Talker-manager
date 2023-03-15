@@ -87,6 +87,16 @@ app.put('/talker/:id', validationName, validationAge, validationTalk,
   return response.status(HTTP_OK_STATUS).json(talkers[talkerId]);
   });
 
+  // Requisito 7 - Crie o endpoint DELETE /talker/:id
+  app.delete('/talker/:id', checkToken, async (request, response) => {
+    const { id } = request.params;
+    const talkers = await readFile();
+    const talkerFiltered = talkers.filter((talker) => talker.id !== Number(id));
+    const talkerUpdated = JSON.stringify(talkerFiltered, null, 2);
+    await writeFile(talkerUpdated);
+    return response.status(204).json(talkerFiltered);
+  });
+
 app.listen(PORT, () => {
   console.log('Online');
 });
