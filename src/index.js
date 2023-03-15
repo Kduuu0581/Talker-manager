@@ -64,6 +64,29 @@ app.post('/talker', validationName, validationAge, validationTalk,
   return response.status(201).json(newTalker);
 });
 
+// Requisito 6 - Crie o endpoint PUT /talker/:id
+app.put('/talker/:id', validationName, validationAge, validationTalk,
+  validationRate, checkToken, async (request, response) => {
+  const { id } = request.params;
+  const { name, age, talk: { watchedAt, rate } } = request.body;
+  const talkers = await readFile();
+  const talkerId = talkers.findIndex((talker) => talker.id === Number(id));
+  if (!talkers[talkerId]) {
+    return response.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+  talkers[talkerId] = {
+    id: Number(id),
+    name,
+    age,
+    talk: {
+      watchedAt,
+      rate,
+    },
+  };
+  await writeFile(talkers);
+  return response.status(HTTP_OK_STATUS).json(talkers[talkerId]);
+  });
+
 app.listen(PORT, () => {
   console.log('Online');
 });
