@@ -5,7 +5,7 @@
 <details>
   <summary markdown="span"><strong>:us: English</strong></summary><br />
 
-Node.js and Express.js project developed by [Raphael Martins](https://www.linkedin.com/in/raphaelameidamartins/) at the end of Unit 22 ([Back-end Development Module](https://github.com/raphaelalmeidamartins/trybe_exercicios/tree/main/3_Desenvolvimento-Back-end)) of Trybe's Web Development course. I was approved with 100% of the mandatory and optional requirements met.
+Node.js and Express.js project of Trybe's Web Development course. 
 
 We had to develop an Express aplication using middlewares.
 <br />
@@ -14,7 +14,7 @@ We had to develop an Express aplication using middlewares.
 <details>
   <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
 
-Projeto Node.js e Express.js desenvolvido por [Raphael Martins](https://www.linkedin.com/in/raphaelameidamartins/) ao final do Bloco 22 ([Módulo Desenvolvimento Back-end](https://github.com/raphaelalmeidamartins/trybe_exercicios/tree/main/3_Desenvolvimento-Back-end)) do curso de Desenvolvimento Web da Trybe. Fui aprovado com 100% dos requisitos obrigatórios e opcionais atingidos.
+Projeto Node.js e Express.js do curso de Desenvolvimento Web da Trybe.
 
 Tivemos que desenvolver uma aplicação Express usando middlewares.
 <br />
